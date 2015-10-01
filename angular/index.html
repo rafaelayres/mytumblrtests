@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" ng-app="BlogsSimilares">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        
+        <!-- Angular JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        
+        <script src="app.js"></script>
+        
+        <title>Encontrar Blogs Similares</title>
+    </head>
+    <body>
+        <div class="container" ng-controller="BlogsCtrl">
+            <div class="jumbotron">
+                <h1>Encontrar Similares</h1>
+                <p>Encontre blogs semelhantes aos seus blogs de interesse</p>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input class="form-control" ng-model="searchTerm" type="search" name="searchTerm" id="searchTerm" value="" placeholder="Pesquise um blog"/>
+                    <button class="btn btn-primary form-control" ng-click="updateAll()" >Pesquisar Blog</button>
+                    {{ searchTerm }}
+                </div>
+                <div class="col-md-9">
+                    teste coluna 2
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped" border="0">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Nome</th>
+                                <th colspan="2">Likes</th>
+                                <th colspan="2">Posts</th>
+                                <th>Seguindo</th>
+                                <th>Seguidores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="blog in myBlogs|orderBy:'-seguidores'">
+                                <td><a ng-href="{{ blog.url }}" target="_blank">{{ blog.title }}</a></td>
+                                <td><a ng-href="{{ blog.url }}" target="_blank">{{ blog.name }}</a></td>
+                                <td ng-if="blog.share_likes">{{ blog.likes }}/{{ blog.avlikes }}</td>
+                                <td ng-if="blog.share_likes">
+                                    <button class="btn btn-primary btn-xs" ng-click="getLikes(blog.name, blog.avlikes)">Load</button>
+                                </td>
+                                <td ng-if="!blog.share_likes">N/A</td>
+                                <td ng-if="!blog.share_likes"></td>
+                                <td>{{ blog.posts }}</td>
+                                <td><button class="btn btn-primary btn-xs">Load</button></td>
+                                <td>{{ blog.seguindo }}</td>
+                                <td>{{ blog.seguidores }}</td>
+                            </tr>
+                        </tbody>
+                    </table>   
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

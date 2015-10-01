@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>BACKAND TEST</title>
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        
+        <!-- Angular JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        
+        <!-- Backand SDK for Angular -->
+        <script src="//cdn.backand.net/backand/dist/1.8.0/backand.min.js"></script>
+        
+        <script src="./app.js"></script>
+        
+    </head>
+    <body>
+        <div class="container" ng-controller="myCtrl">
+            
+            <button class="btn btn-primary" ng-click="analyzeRelations()">Inserir Relacoes</button>
+            
+            <table class="table table-striped" border="0">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>FOLLOWERS</th>
+                        <th>ANALYZED</th>
+                        <th></th>
+                    </tr>    
+                </thead>
+                <tbody>
+                    <tr ng-repeat="blog in blogsBA | orderBy:['-analyzed',countFollowers]:true">
+                        <td><a ng-href="{{ 'http://www.'+blog.name+'.tumblr.com' }}">{{ blog.name }}</a></td>
+                        <td>{{ countFollowers(blog) }}</td>
+                        <td>{{ blog.analyzed }}</td>
+                        <td><button class="btn btn-xs btn-primary form-controller" ng-click="analyze(blog)">Analisar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

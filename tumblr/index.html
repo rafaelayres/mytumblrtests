@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<HTML ng-app="similar">
+<HEAD>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <TITLE>TESTE TUMBLR</TITLE>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+</HEAD>
+<BODY>
+    <div class="container">
+        
+        <div class="jumbotron">
+            <h1>Encontrar Similares</h1>    
+            <p>Encontre blogs com caracteristicas similares</p>
+        </div>
+        
+        <div ng-controller="BlogController as blogsCtrl">
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <div class="form-group has-feedback">
+                            <input  type="text" class="form-control" placeholder="Pesquise um Blog" ng-model="blogsCtrl.searchterm"/>
+                            <i class="glyphicon glyphicon-search form-control-feedback"></i>
+                        </div>     
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="blogsCtrl.searchblog(blogsCtrl.searchterm)">Pesquisar</button>
+                        </span>
+                    </div>
+                    
+                </div>
+            
+                <div class="col-md-9">
+                    <div class="well well-sm" ng-hide="blogsCtrl.blogfound.isFound"> {{blogsCtrl.blogfound.msg}} </div>
+                    <div class="well well-sm" ng-show="blogsCtrl.blogfound.isFound">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img class="img-responsive img-rounded" ng_src="{{blogsCtrl.blogfound.blog.avatar}}"/>
+                            </div>
+                            <div class="col-md-6">
+                                <h1>{{blogsCtrl.blogfound.blog.title}}</h1>
+                                <p>{{blogsCtrl.blogfound.blog.url}}</p>
+                                <button class="btn btn-success" ng-click="blogsCtrl.addblog(blogsCtrl.blogfound.blog)">Inserir blog na lista</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div ng-repeat="blog in blogsCtrl.blogs">
+                <div class="row well well-sm">
+                    <div class="col-md-1 col-xs-4"><img class="img-responsive img-rounded" ng_src="{{blog.avatar}}"></div>
+                    <div class="col-md-4 col-xs-8"><h2>{{blog.title}}</h2></div>
+                    <div class="col-md-6 col-xs-12"><p>{{blog.url}}</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Angular JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+<!-- app.js -->
+<script src="oldapp.js"></script>
+
+</BODY>
+</HTML>
